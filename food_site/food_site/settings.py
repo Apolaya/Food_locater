@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #This is an env for a secret key (API)
 load_dotenv()
-API_SECRET_KEY = os.environ.get("MY_API_KEY")
+API_SECRET_KEY = os.getenv("MY_API_KEY")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
