@@ -18,7 +18,6 @@ def button_action(request):
 def square_clicked(request):
     if request.method == 'POST':
         square_id = request.POST.get('square_id') #This prints empty 
-        
         print(square_id, "THIS IS SQUARE ID PRINT . ")
         return render(request, 'pressed_page.html')
     if request.method == 'GET':

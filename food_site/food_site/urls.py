@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home', include('food_app.urls')),
     path('', include('food_app.urls')),
-    path('pressed_button', include('food_app.urls'))
+    path('pressed_button', include('food_app.urls')),
 ]
