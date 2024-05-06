@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from googlemaps import places
 from googlemaps import client
+import pandas as pd
 
 #https://github.com/googlemaps/google-maps-services-python
 
@@ -16,18 +17,32 @@ key = get_key()
 
 client_key = client.Client(key)
 
-find_place = google_places.find_place(client_key, 
-                                     "aldi", 
-                                     "textquery" 
- )
-print(find_place)
-if find_place['status'] == 'OK' and find_place['candidates']:
-    aldi_id = (find_place["candidates"][0]['place_id'])
-print(aldi_id, )
+
+user_location = input("what location are you looking for: ? ")
+def find_location(user_location, ):
+    found_location = google_places.find_place(client_key, user_location, "textquery")    
+
+    return found_location
+
+found_location = find_location(user_location)
 
 
-aldi_info = google_places.place(client_key, aldi_id )
-#print(aldi_info)
 
-print(aldi_info["result"]["address_components"][0]["long_name"] ,": returned zip code , dict: dict: list : dict" )
-print(aldi_info["result"]["formatted_address"])
+
+ 
+print(found_location)
+if found_location['status'] == 'OK' and found_location['candidates']:
+    location_id = (found_location["candidates"][0]['place_id'])
+print(location_id, )
+
+
+location_info = google_places.place(client_key, location_id )
+
+#test prints
+#print(location_info["result"]["address_components"][0]["long_name"] ,": returned zip code , dict: dict: list : dict" )
+#print(location_info["result"]["formatted_address"])
+#print(location_info)
+
+# start of panda
+pd_location_info = pd.json_normalize(location_info["result"]['address_components'])
+print(pd_location_info)
